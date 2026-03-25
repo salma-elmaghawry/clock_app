@@ -65,6 +65,7 @@ class _ClockScreenState extends State<ClockScreen> {
           datetime: _dateTime,
           textScaleFactor: _clockSize / 200,
           showSeconds: true,
+          format: 'Hms',
         );
       case ClockType.text:
         return Text(
