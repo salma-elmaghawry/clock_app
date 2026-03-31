@@ -1,8 +1,9 @@
-import 'package:clock_app/clock_screen.dart';
 import 'package:clock_app/core/app_colors.dart';
+import 'package:clock_app/core/const.dart';
 import 'package:clock_app/ui/widgets/build_clock.dart';
 import 'package:clock_app/ui/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 class ClockScreen extends StatefulWidget {
   const ClockScreen({super.key});
@@ -16,25 +17,25 @@ class _ClockScreenState extends State<ClockScreen> {
   ClockType _clockType = ClockType.analog;
   double _clockSize = 250.0;
   Color _clockColor = AppColors.primaryBlue;
+  Timer? _timer;
 
   @override
   void initState() {
     super.initState();
-    // Update time every second
-    Future.delayed(Duration.zero, () {
-      _updateTime();
-    });
-  }
-
-  void _updateTime() {
-    Future.delayed(const Duration(seconds: 1), () {
+    // Update time every second using Timer.periodic
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (mounted) {
         setState(() {
           _dateTime = DateTime.now();
         });
-        _updateTime();
       }
     });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
   }
 
   @override
@@ -68,12 +69,11 @@ class _ClockScreenState extends State<ClockScreen> {
       ),
 
       //<===== Body ========>
-      body: SingleChildScrollView(
+      body: Center(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Date display
+            SizedBox(height: 140),
+            //  display
             Text(
               '${_dateTime.year}-${_dateTime.month.toString().padLeft(2, '0')}-${_dateTime.day.toString().padLeft(2, '0')}',
               style: const TextStyle(

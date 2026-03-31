@@ -1,4 +1,4 @@
-import 'package:clock_app/clock_screen.dart';
+import 'package:clock_app/core/const.dart';
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -20,6 +20,33 @@ class CustomDrawer extends StatelessWidget {
     required this.availableColors,
     required this.onClockColorChanged,
   });
+
+  // Build clock type options
+  List<Widget> _buildClockTypeOptions() {
+    final typeNames = {
+      ClockType.analog: 'Analog Clock',
+      ClockType.digital: 'Digital Clock',
+      ClockType.text: 'Text Clock',
+    };
+
+    List<Widget> options = [];
+    for (var type in ClockType.values) {
+      options.add(
+        RadioListTile<ClockType>(
+          value: type,
+          groupValue: clockType,
+          onChanged: (value) {
+            if (value != null) {
+              onClockTypeChanged(value);
+            }
+          },
+          title: Text(typeNames[type]!),
+          contentPadding: EdgeInsets.zero,
+        ),
+      );
+    }
+    return options;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,24 +93,7 @@ class CustomDrawer extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
                 //<=============== Clock type options =================>
-                ...ClockType.values.map((type) {
-                  final typeNames = {
-                    ClockType.analog: 'Analog Clock',
-                    ClockType.digital: 'Digital Clock',
-                    ClockType.text: 'Text Clock',
-                  };
-                  return RadioListTile<ClockType>(
-                    value: type,
-                    groupValue: clockType,
-                    onChanged: (value) {
-                      if (value != null) {
-                        onClockTypeChanged(value);
-                      }
-                    },
-                    title: Text(typeNames[type]!),
-                    contentPadding: EdgeInsets.zero,
-                  );
-                }).toList(),
+                ..._buildClockTypeOptions(),
               ],
             ),
           ),
@@ -114,7 +124,6 @@ class CustomDrawer extends StatelessWidget {
                   value: clockSize,
                   min: 100,
                   max: 400,
-                  divisions: 30,
                   onChanged: (value) {
                     onClockSizeChanged(value);
                   },
@@ -153,11 +162,11 @@ class CustomDrawer extends StatelessWidget {
                         onClockColorChanged(color);
                       },
                       child: Container(
-                        width: 50,
-                        height: 50,
+                        width: 30,
+                        height: 30,
                         decoration: BoxDecoration(
                           color: color,
-                          shape: BoxShape.rectangle,
+                          shape: BoxShape.circle,
                           border: clockColor == color
                               ? Border.all(color: Colors.black, width: 3)
                               : null,
