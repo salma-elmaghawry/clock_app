@@ -1,4 +1,4 @@
-import 'package:clock_app/clock_screen.dart';
+import 'package:clock_app/ui/screens/clock_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
