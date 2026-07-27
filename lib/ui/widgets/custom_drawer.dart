@@ -40,8 +40,8 @@ class CustomDrawer extends StatelessWidget {
               onClockTypeChanged(value);
             }
           },
+
           title: Text(typeNames[type]!),
-          contentPadding: EdgeInsets.zero,
         ),
       );
     }

@@ -28,7 +28,8 @@ class AppColors {
   static const Color errorRed = Color(0xFFF44336);
 
   // Get all clock colors as a list
-  static const List<Color> clockColors = [
+  static const List<Color> clockColors =
+   [
     clockGrey,
     clockRed,
     clockOrange,
