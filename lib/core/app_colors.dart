@@ -37,5 +37,10 @@ class AppColors {
     clockPurple,
     primaryBlue,
     clockYellow,
+    clockRed,
+    clockOrange,
+    clockGreen,
+
+
   ];
 }

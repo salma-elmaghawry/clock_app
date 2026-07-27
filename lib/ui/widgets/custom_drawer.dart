@@ -1,4 +1,5 @@
 import 'package:clock_app/core/const.dart';
+import 'package:clock_app/ui/widgets/custom_header.dart';
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -30,7 +31,8 @@ class CustomDrawer extends StatelessWidget {
     };
 
     List<Widget> options = [];
-    for (var type in ClockType.values) {
+    for (var type in ClockType.values) 
+    {
       options.add(
         RadioListTile<ClockType>(
           value: type,
@@ -77,20 +79,8 @@ class CustomDrawer extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    const Icon(Icons.schedule, color: Colors.grey),
-                    const SizedBox(width: 12),
-                    const Text(
-                      'Clock Type',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
-                ),
+                CustomHeader(icon: Icons.schedule, text: 'Clock Type'),
+
                 const SizedBox(height: 12),
                 //<=============== Clock type options =================>
                 ..._buildClockTypeOptions(),
@@ -105,20 +95,8 @@ class CustomDrawer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //<=============== Clock size options =================>
-                Row(
-                  children: [
-                    const Icon(Icons.text_fields, color: Colors.grey),
-                    const SizedBox(width: 12),
-                    const Text(
-                      'Clock Size',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
-                ),
+                CustomHeader(icon: Icons.text_fields, text: 'Clock Size'),
+
                 const SizedBox(height: 12),
                 Slider(
                   value: clockSize,
@@ -138,20 +116,7 @@ class CustomDrawer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //<=============== Clock color options =================>
-                Row(
-                  children: [
-                    const Icon(Icons.palette, color: Colors.grey),
-                    const SizedBox(width: 12),
-                    const Text(
-                      'Clock Color',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
-                ),
+                CustomHeader(icon: Icons.color_lens, text: 'Clock Color'),
                 const SizedBox(height: 12),
                 Wrap(
                   spacing: 8,
